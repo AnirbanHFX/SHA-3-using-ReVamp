@@ -1,0 +1,25 @@
+{
+    "dim": {
+        "m": 42,
+        "n": 64
+    },
+    "filename": {
+        "varin": "",
+        "input": "Keccak-f1600.inp",
+        "ins_mem": "Keccak-f1600.ins",
+        "output": "Keccak-f1600",
+        "varout": ""
+    },
+    "simulation": {
+        "gen_pwl": 0,
+        "cycles": 0,
+        "print_ins": 1,
+        "verbose": 0
+    },
+    "voltage": {
+        "0": -2.4,
+        "1": 2.4,
+        "delta": 5,
+        "period": 50
+    }
+}
