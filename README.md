@@ -4,6 +4,9 @@
 This file contains the composite instruction set.
 Currently contains Load stage, Theta stage, Rho stage and Pi stage.
 
+### Keccak-f1600.inp
+Contains the required PIR inputs upto Pi stage.
+
 ### load_helper.c
 Used to generate the Load stage instruction set.
 
