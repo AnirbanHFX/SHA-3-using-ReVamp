@@ -5,11 +5,9 @@
 int main() {
 
    FILE *fp;
-   FILE *fp2;
    int k = PREVk + 1;
 
    fp = fopen("temp.txt", "w");
-   fp2 = fopen("temp2.txt", "w");
 
    // ---- 5 times 5XOR --------
 
@@ -175,12 +173,6 @@ int main() {
          fprintf(fp, "\n// Resetting wl %d", l);
          fprintf(fp, "\n\n"); 
 
-         fprintf(fp2, "%d ", k-1);
-         for(int c=0; c<64; c++) {
-            fprintf(fp2, "%d", 1);
-         }
-         fprintf(fp2, "\n\n");
-
       }
 
       fprintf(fp, "Read 31\n\n");
@@ -248,12 +240,6 @@ int main() {
       fprintf(fp, "\n// Reset wl 27");
       fprintf(fp, "\n\n");
 
-      fprintf(fp2, "%d ", k-1);
-      for(int c=0; c<64; c++) {
-         fprintf(fp2, "%d", 1);
-      }
-      fprintf(fp2, "\n\n");
-
       fprintf(fp, "// %d PIR call :: PIR = [ String of 1's ]\n", k++);
       fprintf(fp, "Apply 30 0 00 000000 ");
       for(int j=63; j>=0; j--) {
@@ -262,12 +248,6 @@ int main() {
       fprintf(fp, "\n// Reset wl 30");
       fprintf(fp, "\n\n");  
 
-      fprintf(fp2, "%d ", k-1);
-      for(int c=0; c<64; c++) {
-         fprintf(fp2, "%d", 1);
-      }
-      fprintf(fp2, "\n\n");
-
       fprintf(fp, "// %d PIR call :: PIR = [ String of 1's ]\n", k++);
       fprintf(fp, "Apply 31 0 00 000000 ");
       for(int j=63; j>=0; j--) {
@@ -275,12 +255,6 @@ int main() {
       }
       fprintf(fp, "\n// Reset wl 31");
       fprintf(fp, "\n\n");
-
-      fprintf(fp2, "%d ", k-1);
-      for(int c=0; c<64; c++) {
-         fprintf(fp2, "%d", 1);
-      }
-      fprintf(fp2, "\n\n");
 
    }
 
@@ -362,12 +336,6 @@ int main() {
       fprintf(fp, "\n// Reset wl 25");
       fprintf(fp, "\n\n");
 
-      fprintf(fp2, "%d ", k-1);
-      for(int c=0; c<64; c++) {
-         fprintf(fp2, "%d", 1);
-      }
-      fprintf(fp2, "\n\n");
-
       fprintf(fp, "// %d PIR call :: PIR = [ String of 1's ]\n", k++);
       fprintf(fp, "Apply 28 0 00 000000 ");
       for(int j=63; j>=0; j--) {
@@ -376,12 +344,6 @@ int main() {
       fprintf(fp, "\n// Reset wl 28");
       fprintf(fp, "\n\n");
 
-      fprintf(fp2, "%d ", k-1);
-      for(int c=0; c<64; c++) {
-         fprintf(fp2, "%d", 1);
-      }
-      fprintf(fp2, "\n\n");
-
       fprintf(fp, "// %d PIR call :: PIR = [ String of 1's ]\n", k++);
       fprintf(fp, "Apply 29 0 00 000000 ");
       for(int j=63; j>=0; j--) {
@@ -389,12 +351,6 @@ int main() {
       }
       fprintf(fp, "\n// Reset wl 29");
       fprintf(fp, "\n\n");
-
-      fprintf(fp2, "%d ", k-1);
-      for(int c=0; c<64; c++) {
-         fprintf(fp2, "%d", 1);
-      }
-      fprintf(fp2, "\n\n");
 
    }
 
@@ -475,12 +431,6 @@ int main() {
          }
          fprintf(fp, "\n// Resetting wl %d", a);
          fprintf(fp, "\n\n"); 
-
-         fprintf(fp2, "%d ", k-1);
-         for(int c=0; c<64; c++) {
-            fprintf(fp2, "%d", 1);
-         }
-         fprintf(fp2, "\n\n");
   
          // -------------
 
@@ -507,12 +457,6 @@ int main() {
          fprintf(fp, "\n// Resetting wl 25");
          fprintf(fp, "\n\n"); 
 
-         fprintf(fp2, "%d ", k-1);
-         for(int c=0; c<64; c++) {
-            fprintf(fp2, "%d", 1);
-         }
-         fprintf(fp2, "\n\n");
-
          fprintf(fp, "// %d PIR call :: PIR = [ String of 1's ]\n", k++);
          fprintf(fp, "Apply 28 0 00 000000 ");
          for(int j=63; j>=0; j--) {
@@ -521,12 +465,6 @@ int main() {
          fprintf(fp, "\n// Resetting wl 28");
          fprintf(fp, "\n\n"); 
 
-         fprintf(fp2, "%d ", k-1);
-         for(int c=0; c<64; c++) {
-            fprintf(fp2, "%d", 1);
-         }
-         fprintf(fp2, "\n\n");
-
          fprintf(fp, "// %d PIR call :: PIR = [ String of 1's ]\n", k++);
          fprintf(fp, "Apply 29 0 00 000000 ");
          for(int j=63; j>=0; j--) {
@@ -534,12 +472,6 @@ int main() {
          }
          fprintf(fp, "\n// Resetting wl 29");
          fprintf(fp, "\n\n"); 
-
-         fprintf(fp2, "%d ", k-1);
-         for(int c=0; c<64; c++) {
-            fprintf(fp2, "%d", 1);
-         }
-         fprintf(fp2, "\n\n");
   
       }
 
