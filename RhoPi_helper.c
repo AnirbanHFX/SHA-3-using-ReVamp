@@ -25,9 +25,7 @@ int main() {
    int k = PREVk + 1;
 
    FILE *fp;
-   FILE *fp2;
    fp = fopen("temp.txt", "w");
-   fp2 = fopen("temp2.txt", "w");
 
    int rot_c[25] = {0, 1, 62, 28, 27, 36, 44, 6, 55, 20, 3, 10, 43,
 	25, 39, 41, 45, 15, 21, 8, 18, 2, 61, 56, 14};
@@ -44,7 +42,7 @@ int main() {
 
    fprintf(fp, "\nRead %d\n\n", a);
 
-   fprintf(fp, "Apply %d 0 01 000000 ", 25+loc);
+   fprintf(fp, "Apply %d 1 01 000000 ", 25+loc);
    Rotate(0, fp);
 
    loc = (loc+1)%2;
@@ -62,16 +60,11 @@ int main() {
       fprintf(fp, "\nRead %d\n\n", b);
 
       fprintf(fp, "// %d PIR call :: PIR = [ String of 1's ]\n", k++, j);
-      fprintf(fp2, "%d ", k-1);
-      for(int c=0; c<64; c++) {
-         fprintf(fp2, "%d", 1);
-      }
-      fprintf(fp2, "\n\n");
 
       fprintf(fp, "Apply %d 0 00 000000 ", 25+loc);  // Resets Computation memory
       Rotate(0, fp);
 
-      fprintf(fp, "Apply %d 0 01 000000 ", 25+loc);
+      fprintf(fp, "Apply %d 1 01 000000 ", 25+loc);
       Rotate(0, fp);
 
       loc = (loc+1)%2;
@@ -79,21 +72,22 @@ int main() {
       fprintf(fp, "\nRead %d\n\n", 25+loc);
 
       fprintf(fp, "// %d PIR call :: PIR = [ String of 1's ]\n", k++, j);
-      fprintf(fp2, "%d ", k-1);
-      for(int c=0; c<64; c++) {
-         fprintf(fp2, "%d", 1);
-      }
-      fprintf(fp2, "\n\n");
 
       fprintf(fp, "Apply %d 0 00 000000 ", b);  // Resets SHA-3 state location where shifted word is to be copied
       Rotate(0, fp);   
 
-      fprintf(fp, "Apply %d 0 01 000000 ", b);  // Copied shifted word
+      fprintf(fp, "Apply %d 1 01 000000 ", b);  // Copied shifted word
       Rotate(rot_c[c+1], fp);
 
       c++;
 
    }
+
+      fprintf(fp, "Apply %d 0 00 000000 ", 25);  // Resets Computation memory
+      Rotate(0, fp);
+
+      fprintf(fp, "Apply %d 0 00 000000 ", 26);  // Resets Computation memory
+      Rotate(0, fp);
 
    return 0;
 
