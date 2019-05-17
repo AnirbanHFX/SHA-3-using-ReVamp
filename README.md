@@ -2,7 +2,7 @@
 
 ### Keccak-f1600.ins
 This file contains the composite instruction set.
-Currently contains Load stage, Theta stage, Rho stage and Pi stage.
+Currently contains Load stage, Theta stage, Rho stage, Pi stage and Chi stage.
 
 ### Keccak-f1600.inp
 Contains the required PIR inputs upto Pi stage.
@@ -15,6 +15,9 @@ Used to generate the Theta stage instruction set.
 
 ### RhoPi_helper.c
 Used to generate Rho and Pi stages instruction sets.
+
+### Chi_helper.c
+Used to generate Chi stage instruction set.
 
 ### inp_gen.c
 Used to randomly generate PIR inputs for the initial SHA-3 states.
