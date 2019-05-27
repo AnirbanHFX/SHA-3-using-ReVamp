@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-void Rotate(int c, FILE *fp) {
-
+void Rotate(int c, FILE *fp) {  // Used for bit shifting
+                                // Rotate(0, fp) signifies no bit shifting
    int t = 63-c;
 
    for(int i=0; i<64; i++) {
@@ -50,7 +50,7 @@ int Load(FILE *fp, int cyc) {  //Verified
 
 }
 
-int Theta(FILE *fp, int cyc) {   ///// VERIFIED FOR 1 ROUND ///////
+int Theta(FILE *fp, int cyc) {   ///// VERIFIED //////
 
    // ---- 5 times 5XOR --------
 
@@ -297,7 +297,7 @@ int Theta(FILE *fp, int cyc) {   ///// VERIFIED FOR 1 ROUND ///////
 
          // ----XNOR-----
 
-         fprintf(fp, "Read %d\n\n", 33+2*i);  cyc++;  // CHANGED from 33+2*j///////////////
+         fprintf(fp, "Read %d\n\n", 33+2*i);  cyc++;
 
          fprintf(fp, "Apply 25 1 01 000000 ");  cyc++;
          Rotate(0, fp);
@@ -373,7 +373,7 @@ int Theta(FILE *fp, int cyc) {   ///// VERIFIED FOR 1 ROUND ///////
 
 }
 
-int RhoPi(FILE *fp, int cyc) {  //// VERIFIED FOR 1 ROUND ////////
+int RhoPi(FILE *fp, int cyc) {  //// VERIFIED ////////
 
    const int rot_c[24] = {1,  3,  6,  10, 15, 21, 28, 36, 45, 55, 2,  14,
         27, 41, 56, 8,  25, 43, 62, 18, 39, 61, 20, 44};
@@ -434,7 +434,7 @@ int RhoPi(FILE *fp, int cyc) {  //// VERIFIED FOR 1 ROUND ////////
 
 }
 
-int Chi(FILE *fp, int cyc) {
+int Chi(FILE *fp, int cyc) {  //// VERIFIED /////
 
    fprintf(fp, "// The following code implements Chi stage\n\n");
 
@@ -543,7 +543,7 @@ int Chi(FILE *fp, int cyc) {
 
 }
 
-int Iota(FILE *fp, FILE *fp2, int cyc) {
+int Iota(FILE *fp, FILE *fp2, int cyc) {  ///// VERIFIED /////
 
    fprintf(fp, "// The following code implements Iota stage\n\n");
 
@@ -562,6 +562,8 @@ int Iota(FILE *fp, FILE *fp2, int cyc) {
    fprintf(fp, "Apply 28 0 01 000000 ");  cyc++;
    Rotate(0,fp);
    // ~w0 + ~RC
+
+   printf("CYCLE for RC: %d\n", cyc);
 
    fprintf(fp2, "%d, ", cyc);
 
@@ -606,22 +608,22 @@ int main() {
    int cyc = 0;
 
    FILE *fp;
-   fp = fopen("Instruction.ins", "w");
+   fp = fopen("Keccak-f1600.ins", "w");
 
    FILE *fp2;
    fp2 = fopen("RCt.csv", "w");
 
    cyc = Load(fp, cyc);
 
-   for (int i=0; i<1; i++) {
+   for (int i=0; i<24; i++) {
 
       cyc = Theta(fp, cyc);
 
       cyc = RhoPi(fp, cyc);
 
-      //cyc = Chi(fp, cyc);
+      cyc = Chi(fp, cyc);
 
-      //cyc = Iota(fp, fp2, cyc);
+      cyc = Iota(fp, fp2, cyc);
 
    }
 
