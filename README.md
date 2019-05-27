@@ -18,11 +18,14 @@ Takes a null terminated ASCII string as input and generates the PIR inputs for t
 Also contains String of 1's used to reset wordlines.
 Uses RCt.csv to determine the cycle numbers where Round Constants are loaded to the PIR.
 
+### RCt.csv
+Contains the cycle calls at which Round constants are loaded to the PIR.
+
 ### revamp.py
 ReRam crossbar simulator
 
 ### config_data.json
 Used to specify which files are used for instruction set and input.
 
-## gen_demo_config.py
+### gen_demo_config.py
 Used to generate config_data.json
