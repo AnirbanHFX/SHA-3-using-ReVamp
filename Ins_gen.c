@@ -50,7 +50,7 @@ int Load(FILE *fp, int cyc) {  //Verified
 
 }
 
-int Theta(FILE *fp, int cyc) {
+int Theta(FILE *fp, int cyc) {   ///// VERIFIED FOR 1 ROUND ///////
 
    // ---- 5 times 5XOR --------
 
@@ -103,7 +103,7 @@ int Theta(FILE *fp, int cyc) {
       fprintf(fp, "Apply 31 1 01 000000 ");  cyc++;
       Rotate(0, fp);
       fprintf(fp, "// a.~b + ~(a+~b) = a XOR b");
-      fprintf(fp, "\n\n"); /////////////////////////////////////////////
+      fprintf(fp, "\n\n"); 
 
       fprintf(fp, "Read %d\n\n", i+10);  cyc++;  // Read A[i, 2]
 
@@ -132,7 +132,7 @@ int Theta(FILE *fp, int cyc) {
 
       fprintf(fp, "Read 27\n\n");  cyc++;
 
-      fprintf(fp, "Apply 28 1 01 000000 ");  cyc++; /////////////////////
+      fprintf(fp, "Apply 28 1 01 000000 ");  cyc++; 
       Rotate(0, fp);
       fprintf(fp, "// c.~d + ~(c+~d) = c XOR d");
       fprintf(fp, "\n\n"); 
@@ -151,7 +151,7 @@ int Theta(FILE *fp, int cyc) {
 
       fprintf(fp, "Read 30\n\n");  cyc++;
 
-      fprintf(fp, "Apply 31 1 01 000000 ");  cyc++;/////////////////
+      fprintf(fp, "Apply 31 1 01 000000 ");  cyc++;
       Rotate(0, fp);
       fprintf(fp, "// (aXORb)XOR(cXORd)");   // Result in wl 31
       fprintf(fp, "\n\n");
@@ -214,7 +214,7 @@ int Theta(FILE *fp, int cyc) {
       fprintf(fp, "Apply 31 0 00 000000 ");  cyc++;
       Rotate(0, fp);
 
-   }  /////////////// VERIFIED WORKING for 1 iteration ////////
+   }  
 
    // --------------------------
 
@@ -231,7 +231,7 @@ int Theta(FILE *fp, int cyc) {
       fprintf(fp, "// Shifted copy from UX to Computation memory");
       fprintf(fp, "\n\n");
 
-      fprintf(fp, "Read %d\n\n", 32+2*((i+4)%5));  cyc++;//////////////////////////////////
+      fprintf(fp, "Read %d\n\n", 32+2*((i+4)%5));  cyc++;
 
       fprintf(fp, "Apply 28 1 01 000000 ");  cyc++;
       Rotate(0, fp);
@@ -279,7 +279,7 @@ int Theta(FILE *fp, int cyc) {
       fprintf(fp, "Apply 29 0 00 000000 ");  cyc++;
       Rotate(0, fp);
 
-   } ////////////////////////////////////////////////
+   } 
 
    // ---------------------------
 
@@ -373,20 +373,23 @@ int Theta(FILE *fp, int cyc) {
 
 }
 
-int RhoPi(FILE *fp, int cyc) {
+int RhoPi(FILE *fp, int cyc) {  //// VERIFIED FOR 1 ROUND ////////
 
-   int rot_c[25] = {0, 1, 62, 28, 27, 36, 44, 6, 55, 20, 3, 10, 43,
-	25, 39, 41, 45, 15, 21, 8, 18, 2, 61, 56, 14};
+   const int rot_c[24] = {1,  3,  6,  10, 15, 21, 28, 36, 45, 55, 2,  14,
+        27, 41, 56, 8,  25, 43, 62, 18, 39, 61, 20, 44};
 
+   const int keccak_piln[24] = { 10, 7,  11, 17, 18, 3, 5,  16, 8,  21, 24, 4,
+        15, 23, 19, 13, 12, 2, 20, 14, 22, 9,  6,  1};
+    
    int a, b;
-   int i=0, j=1;
+   int i=0, j=0;
    int loc = 0;
 
    int c=0;
 
    fprintf(fp, "// The following code implements Rho and Pi stages\n\n");
 
-   a = 5*i+j;
+   a = 1;
 
    fprintf(fp, "\nRead %d\n\n", a);  cyc++;
 
@@ -395,17 +398,11 @@ int RhoPi(FILE *fp, int cyc) {
 
    loc = (loc+1)%2;
 
-   while(c < 24) {
+   while(i < 24) {
 
-      a = 5*i+j;
-      b = 5*j + (2*i+3*j)%5;
+      j = keccak_piln[i];
 
-      //printf("%d\n", a);
-
-      i = b/5;
-      j = b%5;
-
-      fprintf(fp, "\nRead %d\n\n", b);  cyc++;
+      fprintf(fp, "\nRead %d\n\n", j);  cyc++;
 
       fprintf(fp, "Apply %d 0 00 000000 ", 25+loc);  cyc++;// Resets Computation memory
       Rotate(0, fp);
@@ -417,13 +414,13 @@ int RhoPi(FILE *fp, int cyc) {
 
       fprintf(fp, "\nRead %d\n\n", 25+loc);  cyc++;
 
-      fprintf(fp, "Apply %d 0 00 000000 ", b);  cyc++;  // Resets SHA-3 state location where shifted word is to be copied
+      fprintf(fp, "Apply %d 0 00 000000 ", j);  cyc++;  // Resets SHA-3 state location where shifted word is to be copied
       Rotate(0, fp);   
 
-      fprintf(fp, "Apply %d 1 01 000000 ", b);  cyc++;  // Copied shifted word
-      Rotate(rot_c[c+1], fp);
+      fprintf(fp, "Apply %d 1 01 000000 ", j);  cyc++;  // Copied shifted word
+      Rotate(rot_c[i], fp);
 
-      c++;
+      i++;
 
    }
 
@@ -622,9 +619,9 @@ int main() {
 
       cyc = RhoPi(fp, cyc);
 
-      cyc = Chi(fp, cyc);
+      //cyc = Chi(fp, cyc);
 
-      cyc = Iota(fp, fp2, cyc);
+      //cyc = Iota(fp, fp2, cyc);
 
    }
 
