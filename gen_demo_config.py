@@ -2,13 +2,13 @@ import json
 data = dict()
 
 data['dim'] = dict()
-data['dim']['m'] = 3
-data['dim']['n'] = 2
+data['dim']['m'] = 42
+data['dim']['n'] = 64
 
 data['filename'] = dict()
-data['filename']['ins_mem'] = '2_bit_xor.ins'
-data['filename']['input']   = '2_bit_xor.inp'
-data['filename']['output']  = '2_bit_xor'
+data['filename']['ins_mem'] = 'Keccak-f1600.ins'
+data['filename']['input']   = 'Keccak-f1600.inp'
+data['filename']['output']  = 'Keccak-f1600'
 
 data['voltage'] = dict()
 data['voltage']['1'] = 2.4
