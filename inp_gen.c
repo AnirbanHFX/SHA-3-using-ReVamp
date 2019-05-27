@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-char* stringToBinary(char* s) {
-    if(s == NULL) return 0; /* no input string */
+char* stringToBinary(char* s) {  // Converts an ascii string to binary
+    if(s == NULL) return 0; 
     size_t len = strlen(s);
     char *binary = malloc(len*8 + 1); // each char is one byte (8 bits) and + 1 at the end for null terminator
     binary[0] = '\0';
@@ -20,7 +20,7 @@ char* stringToBinary(char* s) {
     return binary;
 }
 
-char *sponge(char *bin, unsigned int b) { 
+char *sponge(char *bin, unsigned int b) {   // Converts a binary string to a SHA-3 state string of length b
 
    if (bin == NULL)
       return 0;
@@ -69,6 +69,7 @@ char *sponge(char *bin, unsigned int b) {
 
 int main() {
 
+   // Keccak Round Constants
    char RC[24][64] =  { "0000000000000000000000000000000000000000000000000000000000000001",
                         "0000000000000000000000000000000000000000000000001000000010000010",
                         "1000000000000000000000000000000000000000000000001000000010001010",
@@ -125,7 +126,7 @@ int main() {
 
          fprintf(fp, "%d ", i);
 
-         for (int j=0; j<64; j++) {
+         for (int j=63; j>=0; j--) {
             fprintf(fp, "%c", sp[64*(i/4) + j]);
          }
 
@@ -149,7 +150,7 @@ int main() {
 
    }
 
-   fp2 = fopen ("RCt.csv", "r");
+   fp2 = fopen ("RCt.csv", "r");  // Reads cycle numbers where PIR is called for Round Constants from file RCt.csv
    int c;
 
    for (int i=0; i<24; i++) {
@@ -157,6 +158,8 @@ int main() {
       fscanf(fp2, " %d,", &c);
 
       fprintf(fp, "%d ", c);
+      printf("Putting RC at: %d\n", c);
+
       for (int j=0; j<64; j++)
          fprintf(fp, "%c", RC[i][j]);
 
