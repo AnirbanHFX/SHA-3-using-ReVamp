@@ -2,23 +2,27 @@
 
 ### Keccak-f1600.ins
 This file contains the composite instruction set.
-Currently contains Load stage, Theta stage, Rho stage, Pi stage and Chi stage.
+Can be generated using Ins_gen.c
+It has been tested and verified again Reference SHA-3 implementations.
 
 ### Keccak-f1600.inp
-Contains the required PIR inputs upto Pi stage.
+Contains the example PIR inputs. Can be created using inp_gen.c.
+Currently contains PIR inputs for the ASCII string "abc".
 
-### load_helper.c
-Used to generate the Load stage instruction set.
-
-### Theta_helper.c
-Used to generate the Theta stage instruction set.
-
-### RhoPi_helper.c
-Used to generate Rho and Pi stages instruction sets.
-
-### Chi_helper.c
-Used to generate Chi stage instruction set.
+### Ins_gen.c
+Used to generate the instruction set Keccak-f1600.ins
+Also generated RCt.csv which is used by inp_gen to determine the cycle number where Round Constants are required by Iota stage of Instruction set.
 
 ### inp_gen.c
-Used to randomly generate PIR inputs for the initial SHA-3 states.
-Also contains String of 1 used to reset wordlines
+Takes a null terminated ASCII string as input and generates the PIR inputs for the simulator.
+Also contains String of 1's used to reset wordlines.
+Uses RCt.csv to determine the cycle numbers where Round Constants are loaded to the PIR.
+
+### revamp.py
+ReRam crossbar simulator
+
+### config_data.json
+Used to specify which files are used for instruction set and input.
+
+## gen_demo_config.py
+Used to generate config_data.json
