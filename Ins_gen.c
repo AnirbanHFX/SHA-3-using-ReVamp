@@ -60,7 +60,7 @@ int Theta(FILE *fp, int cyc) {
 
       fprintf(fp, "// Implementation of 5 inp XOR\n\n");
 
-      fprintf(fp, "Read %d\n\n", 5*i);  cyc++;  // Read A[i, 0]
+      fprintf(fp, "Read %d\n\n", i);  cyc++;  // Read A[i, 0]
 
       fprintf(fp, "Apply 26 1 01 000000 ");  cyc++;  
       Rotate(0, fp);
@@ -76,7 +76,7 @@ int Theta(FILE *fp, int cyc) {
       fprintf(fp, "Apply 31 1 01 000000 ");  cyc++;
       Rotate(0, fp);     
 
-      fprintf(fp, "Read %d\n\n", 5*i+1);  cyc++;  // Read A[i, 1]
+      fprintf(fp, "Read %d\n\n", i+5);  cyc++;  // Read A[i, 1]
 
       fprintf(fp, "Apply 29 1 01 000000 ");  cyc++;
       Rotate(0, fp);
@@ -105,7 +105,7 @@ int Theta(FILE *fp, int cyc) {
       fprintf(fp, "// a.~b + ~(a+~b) = a XOR b");
       fprintf(fp, "\n\n"); /////////////////////////////////////////////
 
-      fprintf(fp, "Read %d\n\n", 5*i+2);  cyc++;  // Read A[i, 2]
+      fprintf(fp, "Read %d\n\n", i+10);  cyc++;  // Read A[i, 2]
 
       fprintf(fp, "Apply 25 1 01 000000 ");  cyc++;
       Rotate(0, fp); 
@@ -118,7 +118,7 @@ int Theta(FILE *fp, int cyc) {
       fprintf(fp, "Apply 28 1 01 000000 ");  cyc++;/////////
       Rotate(0, fp);
 
-      fprintf(fp, "Read %d\n\n", 5*i+3);  cyc++;  // Read A[i, 3]
+      fprintf(fp, "Read %d\n\n", i+15);  cyc++;  // Read A[i, 3]
 
       fprintf(fp, "Apply 27 1 01 000000 ");  cyc++;
       Rotate(0, fp);
@@ -173,7 +173,7 @@ int Theta(FILE *fp, int cyc) {
       fprintf(fp, "Apply 30 1 01 000000 ");  cyc++;
       Rotate(0, fp);
 
-      fprintf(fp, "Read %d\n\n", 5*i+4);  cyc++; // Read A[i,4]
+      fprintf(fp, "Read %d\n\n", i+20);  cyc++; // Read A[i,4]
 
       fprintf(fp, "Apply 31 1 00 000000 ");  cyc++;
       Rotate(0, fp);
@@ -214,7 +214,7 @@ int Theta(FILE *fp, int cyc) {
       fprintf(fp, "Apply 31 0 00 000000 ");  cyc++;
       Rotate(0, fp);
 
-   }  ////////////////////////////////////////////////////
+   }  /////////////// VERIFIED WORKING for 1 iteration ////////
 
    // --------------------------
 
@@ -224,7 +224,7 @@ int Theta(FILE *fp, int cyc) {
 
    for (int i=0; i<5; i++) {
 
-      fprintf(fp, "Read %d\n\n", 32+2*(i+1)%5);  cyc++;
+      fprintf(fp, "Read %d\n\n", 32+2*((i+1)%5));  cyc++;
 
       fprintf(fp, "Apply 25 1 01 000000 ");  cyc++;
       Rotate(1, fp);
@@ -291,13 +291,13 @@ int Theta(FILE *fp, int cyc) {
 
    for (int i=0; i<5; i++) {
 
-      for (int j=0; j<5; j++) {
+      for (int j=0; j<25; j+=5) {
 
-         a = 5*i+j;
+         a = j+i;
 
          // ----XNOR-----
 
-         fprintf(fp, "Read %d\n\n", 33+2*j);  cyc++;  // CHANGED from 33+2*i///////////////
+         fprintf(fp, "Read %d\n\n", 33+2*i);  cyc++;  // CHANGED from 33+2*j///////////////
 
          fprintf(fp, "Apply 25 1 01 000000 ");  cyc++;
          Rotate(0, fp);
@@ -620,15 +620,14 @@ int main() {
 
       cyc = Theta(fp, cyc);
 
-      //cyc = RhoPi(fp, cyc);
+      cyc = RhoPi(fp, cyc);
 
-      //cyc = Chi(fp, cyc);
+      cyc = Chi(fp, cyc);
 
-      //cyc = Iota(fp, fp2, cyc);
+      cyc = Iota(fp, fp2, cyc);
 
    }
 
    return 0;  
 
 }
-
