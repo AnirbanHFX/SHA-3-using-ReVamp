@@ -570,7 +570,7 @@ class ReVAMP:
         if voltage_spec != None:
             self.voltage.append(curr_vol)
 
-    def printCrossbarState(self,msg=None):
+    def printCrossbarState(self,msg=None): 
         if msg != None:
             print('Crossbar State [',msg,'] :')
         else:
@@ -578,6 +578,11 @@ class ReVAMP:
         for i in range(self.m-1,-1,-1):
             for j in range(0,self.n):
                 print(self.crossbar[i][j],end='')
+            print('',end='\n')
+        for i in range(self.m-1,-1,-1):
+            strin = ''.join(str(e) for e in self.crossbar[i])
+            print("wl ", '%2d'%i,": ",end='')
+            print('%016x'%(int(strin, 2)),end='')
             print('',end='\n')
 
 
